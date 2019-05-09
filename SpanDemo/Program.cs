@@ -33,6 +33,10 @@ namespace SpanDemo
             Marshal.WriteInt64(bufferMemory, 8, 100);
             // 手动释放非托管内存
             Marshal.FreeHGlobal(bufferMemory);
+
+            // Memory<> 类型也像 Span<> 那样是个高效操作内存的类型，不同的是 Memory<> 是值类型，无法 ref；
+            Memory<byte> memory = new Memory<byte>(buffer);
+            memory.Slice(0, 128);
         }
     }
 }
